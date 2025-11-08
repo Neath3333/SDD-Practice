@@ -1,0 +1,44 @@
+openapi: 3.0.3
+info:
+  title: Task API (Learning SDD)
+  version: 1.0.0
+  description: A small Task API to practice Spec-Driven Development
+
+servers:
+  - url: http://localhost:3000
+    description: Local development server
+
+paths:
+  /tasks:
+    get:
+      summary: List all tasks
+      operationId: listTasks
+      responses:
+        '200':
+          description: A list of tasks
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Task'
+
+components:
+  schemas:
+    Task:
+      type: object
+      required:
+        - id
+        - title
+        - status
+      properties:
+        id:
+          type: string
+          example: "1"
+        title:
+          type: string
+          example: "Buy groceries"
+        status:
+          type: string
+          enum: [PENDING, IN_PROGRESS, DONE]
+          example: "PENDING"
